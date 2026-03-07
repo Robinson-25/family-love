@@ -1,7 +1,5 @@
 "use client";
 
-import room from "@/app/(root)/pago/_components/ReservationSummaryRoom/room";
-import ButtonLoading from "@/components/Loading/ButtonLoading/button-loading";
 import { Button } from "@/components/ui/button";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import axios from "axios";
@@ -9,7 +7,7 @@ import { Images } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -18,12 +16,11 @@ interface Props {
 
 const FormAddImages = ({ hotelCenter }: Props) => {
   const router = useRouter();
-  const [formLoading, setFormLoading] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col gap-8 items-center justify-center">
-      <h2 className="text-xl font-medium">Agrega Imagenes</h2>
+      <h2 className="text-xl font-medium">Agrega Imágenes</h2>
 
       <CldUploadWidget
         signatureEndpoint="/api/cloudinary/api/sign-params"
@@ -38,8 +35,9 @@ const FormAddImages = ({ hotelCenter }: Props) => {
               `/api/hotel-centers/api/add-uploaded-images`,
               { hotelCenterId: hotelCenter.id, images: images }
             );
+
             if (data.ok) {
-              toast.success("Imagenes subidas correctamente");
+              toast.success("Imágenes subidas correctamente");
               widget.close();
               router.refresh();
             }
@@ -48,15 +46,15 @@ const FormAddImages = ({ hotelCenter }: Props) => {
           }
 
           if (result.info) {
-            setImageUrls([
-              ...imageUrls,
+            setImageUrls((prev) => [
+              ...prev,
               ...images.map((image: any) => image.url),
             ]);
           }
         }}
         onError={(result, { widget }) => {
           setTimeout(() => {
-            toast.error("Ocurió un error durante el proceso");
+            toast.error("Ocurrió un error durante el proceso");
             widget.close();
           }, 300);
         }}
@@ -66,14 +64,12 @@ const FormAddImages = ({ hotelCenter }: Props) => {
           multiple: true,
         }}
       >
-        {({ open, cloudinary }) => {
+        {({ open }) => {
           return (
             <Button
               type="button"
               variant={"bookingFormButton"}
-              onClick={() => {
-                open();
-              }}
+              onClick={() => open()}
               className="flex items-center gap-2"
             >
               <Images className="w-4 h-4" />
@@ -84,26 +80,24 @@ const FormAddImages = ({ hotelCenter }: Props) => {
       </CldUploadWidget>
 
       {!!imageUrls.length && (
-        <>
-          <div className="flex flex-col items-center gap-8">
-            <h3 className="text-base font-medium text-center">
-              Vista Previa de Imagenes
-            </h3>
+        <div className="flex flex-col items-center gap-8">
+          <h3 className="text-base font-medium text-center">
+            Vista previa de imágenes
+          </h3>
 
-            <div className="flex gap-6 flex-wrap max-w-[800px] justify-center pb-16">
-              {imageUrls.map((url, i) => (
-                <Image
-                  key={i}
-                  className="h-fit"
-                  src={url}
-                  width={350}
-                  height={200}
-                  alt={`Imagen subida ${i + 1}`}
-                />
-              ))}
-            </div>
+          <div className="flex gap-6 flex-wrap max-w-[800px] justify-center pb-16">
+            {imageUrls.map((url, i) => (
+              <Image
+                key={i}
+                className="h-fit"
+                src={url}
+                width={350}
+                height={200}
+                alt={`Imagen subida ${i + 1}`}
+              />
+            ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
