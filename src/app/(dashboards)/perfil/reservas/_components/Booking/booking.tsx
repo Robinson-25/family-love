@@ -10,7 +10,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Booking as BookingType } from "@/types/Booking/booking";
-import room from "@/app/(root)/pago/_components/ReservationSummaryRoom/room";
+
 
 interface Props {
   booking: BookingType;
