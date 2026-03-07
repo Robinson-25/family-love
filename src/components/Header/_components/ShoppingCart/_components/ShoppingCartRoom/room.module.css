@@ -1,0 +1,6 @@
+.image-container:before {
+  opacity: 100%;
+}
+.image-container div:nth-child(1) {
+  opacity: 100%;
+}

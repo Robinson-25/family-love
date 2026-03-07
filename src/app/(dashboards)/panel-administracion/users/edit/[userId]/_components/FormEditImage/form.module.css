@@ -1,0 +1,9 @@
+.shadow {
+  opacity: 0;
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.image-container:hover .shadow {
+  opacity: 100;
+}

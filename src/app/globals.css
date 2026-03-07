@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --PhoneInputCountrySelectArrow-color: rgb(20, 20, 20);
+  --fl-blue: #0271bd;
+  --fl-celeste: #73eafe;
+  --fl-purple: #6923b7;
+}
+
+@layer utilities {
+  .rotate-child-180 .child {
+    transform: rotate(180deg);
+  }
+  .hover-child-white:hover div {
+    background-color: white;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  background-color: rgb(118, 118, 118);
+}
+*::-webkit-scrollbar:horizontal {
+  height: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(180, 180, 180);
+}
+
+html.dark *::-webkit-scrollbar,
+html.dark *::-webkit-scrollbar {
+  background-color: rgb(18, 18, 18);
+}
+
+html.dark *::-webkit-scrollbar-thumb,
+html.dark *::-webkit-scrollbar-thumb {
+  background-color: rgb(60, 60, 60);
+}

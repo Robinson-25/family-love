@@ -1,0 +1,16 @@
+.phone-input-container input {
+  background-color: transparent;
+  outline: none;
+  padding: 0 4px;
+}
+.phone-input-container {
+  border: 1px solid rgb(226, 226, 226);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+  transition: all;
+  transition-duration: 300ms;
+  outline: 2px solid transparent;
+}

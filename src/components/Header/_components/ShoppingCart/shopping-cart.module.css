@@ -1,0 +1,7 @@
+.sheet-content::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgb(40, 40, 40);
+}
+.sheet-content::-webkit-scrollbar-thumb {
+  background-color: rgb(80, 80, 80);
+}

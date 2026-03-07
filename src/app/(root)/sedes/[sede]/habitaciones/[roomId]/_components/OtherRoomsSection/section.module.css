@@ -1,0 +1,14 @@
+.item {
+  transition: all;
+  transition-duration: 500ms;
+}
+
+.container:hover .item {
+  opacity: 100%;
+}
+.container:hover .item1 {
+  top: 50%;
+}
+.container:hover .item2 {
+  right: 50%;
+}
