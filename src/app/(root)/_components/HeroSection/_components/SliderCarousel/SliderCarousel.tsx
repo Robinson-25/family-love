@@ -1,6 +1,6 @@
 "use client";
 
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useState, useEffect, useRef } from "react";
 import Slide from "../Slide/slide";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 
@@ -41,60 +41,63 @@ const transformDataToSlideData = (data: HotelCenter[]) => {
       urlSegment: data[i].urlSegment,
     };
   }
-
   return slides;
 };
 
 const SliderCarousel = ({ dataSlides }: Props) => {
-  const [slides, setSlides] = useState(() => {
-    const data = transformDataToSlideData(dataSlides);
-
-    return data;
-  });
+  const [slides, setSlides] = useState(() => transformDataToSlideData(dataSlides));
   const [currentSlide, setCurrentSlide] = useState(slides["slide1"]);
-  const [disabledButtons, setDisabledButtons] = useState(false);
+  const currentSlideRef = useRef(currentSlide);
+  const slidesRef = useRef(slides);
 
-  const changeSlide = async (slideId: SlideId) => {
-    if (currentSlide.index !== slides[slideId].index) {
-      setDisabledButtons(true);
-      const numberSlide = slides[slideId].index;
-      slides[slideId].width = `w-full transition-[width] duration-1200 ${
-        numberSlide < currentSlide.index ? "left-0" : "right-0"
-      }`;
-      let currentSlideId: SlideId;
-      for (let slide in slides) {
-        const s = slide as SlideId;
-        if (slides[s].index === currentSlide.index) {
-          currentSlideId = s;
-          slides[s].width = `w-0 transition-[width] duration-1400 ${
-            numberSlide < currentSlide.index ? "right-0" : "left-0"
-          }`;
-          slides[s].isMounted = false;
-          const newZIndex = slides[slideId].zIndex;
-          slides[slideId].zIndex = slides[s].zIndex;
-          slides[s].zIndex = newZIndex;
-        }
+  useEffect(() => {
+    currentSlideRef.current = currentSlide;
+  }, [currentSlide]);
+
+  useEffect(() => {
+    slidesRef.current = slides;
+  }, [slides]);
+
+  const changeSlide = (slideId: SlideId) => {
+    const currentSlides = { ...slidesRef.current };
+    const current = currentSlideRef.current;
+
+    if (current.index === currentSlides[slideId].index) return;
+
+    for (let slide in currentSlides) {
+      const s = slide as SlideId;
+      if (currentSlides[s].index === current.index) {
+        currentSlides[s].width = "w-0";
+        currentSlides[s].isMounted = false;
+        currentSlides[s].buttonBgColor = "bg-zinc-400";
       }
-
-      await (async () => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            slides[currentSlideId].buttonBgColor = "bg-zinc-400";
-            slides[slideId].buttonBgColor = "bg-white";
-            slides[slideId].isMounted = true;
-            setSlides(slides);
-            setDisabledButtons(false);
-            resolve("");
-          }, 900);
-        });
-      })();
-      setCurrentSlide(slides[slideId]);
     }
+
+    currentSlides[slideId].width = "w-full";
+    currentSlides[slideId].isMounted = true;
+    currentSlides[slideId].buttonBgColor = "bg-white";
+
+    setSlides(currentSlides);
+    setCurrentSlide(currentSlides[slideId]);
   };
+
+  useEffect(() => {
+    const slideKeys = Object.keys(slidesRef.current);
+    if (slideKeys.length <= 1) return;
+
+    const interval = setInterval(() => {
+      const current = currentSlideRef.current;
+      const total = slideKeys.length;
+      const nextIndex = (current.index % total) + 1;
+      const nextSlideId = `slide${nextIndex}` as SlideId;
+      changeSlide(nextSlideId);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
-    
       {Object.entries(slides).map((slide, i) => (
         <div
           key={i}
@@ -110,24 +113,18 @@ const SliderCarousel = ({ dataSlides }: Props) => {
         </div>
       ))}
 
-      <div
-        className={`absolute flex flex-col items-center gap-8 cursor-pointer bottom-20 right-1/2 translate-x-1/2 z-[50]`}
-      >
-        <div className={`flex gap-4`}>
+      <div className="absolute flex flex-col items-center gap-8 cursor-pointer bottom-20 right-1/2 translate-x-1/2 z-[50]">
+        <div className="flex gap-4">
           {Object.entries(slides).map((slide, i) => (
             <button
-              disabled={disabledButtons}
               key={i}
               id={slide[0]}
-              onClick={async (e: MouseEvent<HTMLButtonElement>) => {
-                console.log(e.currentTarget.id);
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
                 changeSlide(e.currentTarget.id as SlideId);
               }}
               className="h-10 w-10 flex items-center justify-center hover-child-white text-white cursor-pointer"
             >
-              <div
-                className={`h-[2px] w-full ${slide[1].buttonBgColor} transition-all duration-200`}
-              ></div>
+              <div className={`h-[2px] w-full ${slide[1].buttonBgColor}`} />
             </button>
           ))}
         </div>

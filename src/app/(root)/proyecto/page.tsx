@@ -180,7 +180,7 @@ function Modal({ proyecto, onClose }: { proyecto: Proyecto; onClose: () => void 
                   width={800}
                   height={600}
                   className="object-contain w-full"
-                />
+                />Ñ
               </div>
               {proyecto.fotos.length > 1 && (
                 <div className="flex justify-center gap-2 mt-2">
@@ -271,6 +271,48 @@ export default function ProyectoPage() {
               </div>
             </button>
           ))}
+        </div>
+      </section>
+
+      {/* ── ALIANZAS ───────────────────────────────────────────────────── */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <span className="text-[#2251a3] font-semibold text-sm tracking-widest uppercase">Quienes nos respaldan</span>
+            <h2 className="text-4xl font-extrabold text-gray-900 mt-2">Alianzas y Crecimiento Institucional</h2>
+            <p className="text-gray-500 mt-4 max-w-2xl mx-auto leading-relaxed">
+              En su proceso de crecimiento, Family Love contó con el respaldo de aliados estratégicos y auspiciadores que confiaron en nuestra misión social.
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 mb-14">
+            {[
+              "I.E.P. San Antonio María Claret",
+              "Dr. Alex Sinche",
+              "Diario Primicia",
+              "Ancosur Inmobiliaria",
+              "ROMY'S Power and Style",
+              "Mr. Juerga",
+              "Joel Oroncoy",
+              "Miluscka Makeup Pro & Medical Beauty",
+              "Rock Centro",
+              "Férnix Moda",
+              "Familia Santo Rojas",
+              "Rosbal",
+              "Yessia Studio",
+            ].map((aliado, i) => (
+              <span
+                key={i}
+                className="bg-white border-2 border-[#1a3a6b] text-[#1a3a6b] font-semibold px-5 py-2.5 rounded-full shadow-sm hover:bg-[#1a3a6b] hover:text-white transition-all duration-300 text-sm"
+              >
+                {aliado}
+              </span>
+            ))}
+          </div>
+          <div className="bg-gradient-to-r from-[#1a3a6b] to-[#2251a3] rounded-3xl p-8 text-center text-white">
+            <p className="text-lg leading-relaxed text-white/90 max-w-3xl mx-auto">
+              Actualmente, Family Love continúa consolidándose como una organización juvenil con estructura formal, visión de crecimiento y compromiso sostenido con el desarrollo social y humano.
+            </p>
+          </div>
         </div>
       </section>
 

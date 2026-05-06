@@ -2,31 +2,31 @@ import Image from "next/image";
 
 // ─── DATOS ────────────────────────────────────────────────────────────────────
 const mision =
-  "Somos una asociación sin fines de lucro que busca el desarrollo integral en los jóvenes mediante el voluntariado a la población.";
+  "Somos una organización sin fines de lucro que busca el desarrollo integral en los jóvenes mediante el voluntariado a la población.";
 
 const vision =
-  "Ser una asociación sin fines de lucro reconocida a nivel nacional por su impacto positivo en el desarrollo integral de la juventud y en la labor social en la población.";
+  "Ser una organización sin fines de lucro reconocida a nivel nacional por su impacto positivo en el desarrollo integral de la juventud y en la labor social en la población.";
 
 const historia = [
   {
     fecha: "10 julio 2024",
     texto:
-      "Nace Family Love por iniciativa de dos estudiantes de Medicina Humana, Tania Trinidad Meza y Naiara Raymundo Maraví, con el propósito de contribuir al desarrollo integral de los jóvenes a través del voluntariado.",
+      "Family Love fue creada el 10 de julio de 2024 por iniciativa de dos estudiantes de Medicina Humana, Tania Sarai Trinidad Meza y Naiara Raymundo Maraví, con el propósito de contribuir al desarrollo integral de adolescentes y jóvenes a través del voluntariado, la acción social y el liderazgo con enfoque humano.",
   },
   {
     fecha: "12 julio 2024",
     texto:
-      "Se crea el logo de Family Love gracias al talento de la estudiante de Medicina Humana, Dayana Limache.",
+      "La organización Family Love inició su identidad visual el 12 de julio de 2024 con un primer logo creado por la estudiante Dayana Limache. Posteriormente, el 2 de abril de 2025, se presentó el logo oficial diseñado por Haiden Espinoza.Desde su fundación, la organización ha sido liderada por su fundadora Tania Sarai Trinidad Meza, quien fue Co-Directora General en 2024 y Directora General durante 2025 y 2026. La organización trabaja para generar impacto social sostenible promoviendo valores como la empatía, la solidaridad y el compromiso comunitario en Perú.",
   },
   {
-    fecha: "6 octubre 2024",
+    fecha: "Formación inicial del equipo de líderes",
     texto:
-      "Se conforma el equipo de líderes de la asociación, integrado por Maricely Fabián, Piero Bernal, Sebastián Torres, Angie del Río, Amy Egoavil y Solimar Oviedo.",
+      "El 6 de octubre de 2024, se conformó el primer equipo de líderes de Family Love, conformado por:Maricely Fabian,Piero Bernal,Sebastian Torres,Angie del Río,Solimar Oviedo y Amy Egoavil. Este equipo lideró las primeras actividades y programas de la organización durante su año inaugural",
   },
   {
-    fecha: "A lo largo del año",
+    fecha: "Equipo de gestión hasta finales de 2025",
     texto:
-      "Family Love desarrolló el Taller de Risoterapia para adultos mayores de ONP y CAM ESSALUD-Concepción, y dos campañas navideñas en Ullusca, Jauja y Huancayo. Gracias al auspicio de I.E.P. San Antonio María Claret, Dr. Alex Sinche y Diario Primicia.",
+      "El equipo de apoyo de Family Love acompañó las actividades sociales y formativas de la organización hasta finales de 2025. Entre los integrantes se encuentran Darlyne Oviedo Villantoy, Angie del Río Borja, Esaú Sedano Samaniego, Ibeth Fernandez Chachi, Jhan Toro Baltazar, Maciel Quispe Chenet, Mafer Mayta Carhuancho y Dulce del Río Borja. Su participación fue clave para fortalecer la organización y mantener los programas y campañas durante 2024 y 2025.",
   },
 ];
 

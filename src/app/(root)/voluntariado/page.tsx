@@ -38,7 +38,7 @@ const requisitos = [
   { numero: "01", texto: "Tener entre 16 y 35 años de edad." },
   { numero: "02", texto: "Compromiso mínimo de 3 horas semanales." },
   { numero: "03", texto: "Actitud positiva, responsabilidad y trabajo en equipo." },
-  { numero: "04", texto: "Disponibilidad para participar en actividades presenciales, o virtual." },
+  { numero: "04", texto: "Portar el polo institucional  de la organización" },
   { numero: "05", texto: "No se requiere experiencia previa — solo muchas ganas de ayudar." },
 ];
 

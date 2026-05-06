@@ -33,12 +33,7 @@ const Header = async () => {
         <Navbar hotelCentersData={data.hotelCenters} />
       </div>
       <div className="flex items-center gap-4 md:gap-5">
-        <Link
-          href={"/contacto"}
-          className="h-9 hidden text-sm rounded-md font-normal tracking-wide sm:flex sm:items-center sm:justify-center bg-[#0271bd] hover:bg-[#6923b7] transition-all duration-300 text-white w-36"
-        >
-          Sede Contáctos
-        </Link>
+        
         <ToggleTheme />
         <UserProfile />
       </div>
@@ -47,3 +42,5 @@ const Header = async () => {
 };
 
 export default Header;
+
+

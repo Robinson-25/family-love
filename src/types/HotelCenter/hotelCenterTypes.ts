@@ -1,6 +1,3 @@
-import { Image } from "../Image/image";
-import { Room } from "../Room/room";
-
 export interface HotelCenter {
   id: string;
   name: string;
@@ -12,6 +9,6 @@ export interface HotelCenter {
   phone: string | null;
   cellPhone: string | null;
   garage: boolean;
-  rooms: Room[];
-  images: Image[];
+  rooms: any[];
+  images: any[];
 }
