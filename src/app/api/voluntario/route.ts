@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "Family Love <onboarding@resend.dev>",
-      to: "robinsonwelkinbiktuchumpi@gmail.com",
+      to: "familylovevoluntariado@gmail.com",
       subject: `🌟 Nuevo voluntario: ${nombre}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

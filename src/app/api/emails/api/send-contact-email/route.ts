@@ -23,8 +23,8 @@ export const POST = async (req: NextRequest) => {
     }
 
     await resend.emails.send({
-      from: "Hospedaje El Rinconcito <onboarding@resend.dev>",
-      to: ["robinsonwelkinbiktuchumpi@gmail.com"],
+      from: "Family Love <onboarding@resend.dev>",
+      to: ["familylovevoluntariado@gmail.com"],
       subject: "Email de cliente",
       html: `<div>
               <p>Enviado por: ${name}</p>
