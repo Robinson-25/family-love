@@ -1,5 +1,3 @@
-import { Image } from "../Image/image";
-
 export type User = {
   id: string;
   username: string;
@@ -7,5 +5,10 @@ export type User = {
   password: string;
   role: string;
   emailVerified?: Date;
-  image?: Image;
+  image?: {
+    id: string;
+    url: string;
+    public_id: string;
+    userId?: string;
+  };
 };
