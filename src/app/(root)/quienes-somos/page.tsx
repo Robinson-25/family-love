@@ -74,7 +74,7 @@ const equipo = [
   {
     nombre: "Naiara Raymundo",
     cargo: "CONSEJERA INSTITUCIONAL - FUNDADORA",
-    imagen: "/images/hero-images/naiara.png",
+    imagen: "/images/hero-images/Naiara.png",
     bio: "Estudiante de Medicina Humana y fundadora de Family Love. Ponente en el tema 'Cirrosis hepática y complicaciones' – SOCIEMLA, 2024. Coordinadora de la Sociedad de Clown Hospitalario y Comunitario 'Thieves of Smiles' – UPLA, 2023. Especialista certificada en lectura veloz – ENSIL. Reconocida como Mejor Cumista Femenina en el CUMIS Nacional 2024-I, Río Tambo – SOCIEMC. Ponente en los talleres 'Niño interior y manejo de grupos infantiles' (SOCIEMC) e 'Introducción al clown hospitalario' (Universidad Nacional de Piura), ambos 2024-I. Ponente del tema 'Anatomía de miembro inferior' – SOCIEMLA, 2021.",
   },
   {
@@ -98,7 +98,7 @@ const equipo = [
   {
     nombre: "Ibeth Fernandez",
     cargo: "SUB DIRECTORA ACADÉMICA",
-    imagen: "/images/hero-images/ibeth.png",
+    imagen: "/images/hero-images/Ibeth.png",
     bio: "Estudiante de la Facultad de Medicina Humana. Participante en campañas médicas en Comas. Voluntaria en la campaña navideña de San José de Apata – Family Love, 2025, y en la campaña navideña de Ullusca, Jauja – Family Love, 2024. Subdirectora del Comité Académico durante el periodo 2025–2026. Formación en Ofimática en el Centro Educativo Procedat.",
   },
   {
