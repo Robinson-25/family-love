@@ -6,12 +6,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "family_love",
-});
+const db = mysql.createPool(process.env.DATABASE_URL!);
 
 export async function POST(req: Request) {
   try {
