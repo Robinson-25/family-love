@@ -1,7 +1,6 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 
 export const getAllUsers = async () => {
-  const users = await prisma.user.findMany({ include: { image: true } });
+  const [users] = await db.execute("SELECT * FROM User") as any;
   return users;
 };
