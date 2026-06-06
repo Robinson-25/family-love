@@ -4,8 +4,7 @@ import {
   UploadApiResponse,
   v2 as cloudinary,
 } from "cloudinary";
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -19,6 +18,7 @@ export const POST = async (req: NextRequest) => {
   if (!form.get("image")) {
     return NextResponse.json({ error: "Debes subir una imagen" });
   }
+
   const userId = form.get("userId") as string;
   const image = form.get("image") as File;
 
@@ -26,13 +26,15 @@ export const POST = async (req: NextRequest) => {
     const bytes = await image.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: { image: true },
-    });
+    const [userRows] = await db.execute(
+      "SELECT u.*, i.public_id, i.url, i.id as imageId FROM User u LEFT JOIN image i ON i.userId = u.id WHERE u.id = ?",
+      [userId]
+    ) as any;
+    const user = (userRows as any[])[0];
 
-    if (user?.image?.public_id) {
-      const response = await cloudinary.uploader.destroy(user.image.public_id);
+    if (user?.public_id) {
+      await cloudinary.uploader.destroy(user.public_id);
+      await db.execute("DELETE FROM image WHERE userId = ?", [userId]);
     }
 
     const response: UploadApiResponse | UploadApiErrorResponse | undefined =
@@ -44,9 +46,7 @@ export const POST = async (req: NextRequest) => {
               folder: `${process.env.CLOUDINARY_FOLDER}/usuarios/${user?.username}`,
             },
             (err, result) => {
-              if (err) {
-                reject(err);
-              }
+              if (err) reject(err);
               resolve(result);
             }
           )
@@ -54,17 +54,13 @@ export const POST = async (req: NextRequest) => {
       });
 
     if (response?.http_code) {
-      return NextResponse.json({ error: response.message });
+      return NextResponse.json({ error: (response as UploadApiErrorResponse).message });
     }
 
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        image: {
-          create: { url: response?.secure_url, public_id: response?.public_id },
-        },
-      },
-    });
+    await db.execute(
+      "INSERT INTO image (url, public_id, userId) VALUES (?, ?, ?)",
+      [(response as UploadApiResponse).secure_url, (response as UploadApiResponse).public_id, userId]
+    );
 
     return NextResponse.json({
       ok: true,
