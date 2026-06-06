@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-// ─── DATOS ────────────────────────────────────────────────────────────────────
 const razones = [
   {
     icono: "💛",
@@ -38,39 +39,40 @@ const requisitos = [
   { numero: "01", texto: "Tener entre 16 y 35 años de edad." },
   { numero: "02", texto: "Compromiso mínimo de 3 horas semanales." },
   { numero: "03", texto: "Actitud positiva, responsabilidad y trabajo en equipo." },
-  { numero: "04", texto: "Portar el polo institucional  de la organización" },
+  { numero: "04", texto: "Portar el polo institucional de la organización" },
   { numero: "05", texto: "No se requiere experiencia previa — solo muchas ganas de ayudar." },
 ];
 
 const testimonios = [
   {
-    nombre: "Robinson W. Biktu",
-    cargo: "Voluntario desde 2025",
+    nombre: "MARIA HUALLPA-VOLUNTARIA",
+    cargo: "Voluntaria 2025",
     texto:
-      "Unirme a Family Love fue una de las mejores decisiones de mi vida. Aprendí a valorar lo que tengo y a dar sin esperar nada a cambio.",
-    inicial: "R",
+      "Ser parte de Family Love ha sido una experiencia que marcó mi corazón. Poder llevar alegría, amor y momentos de risa a diferentes personas es algo que no tiene precio. Ver sonrisas sinceras y corazones agradecidos me hizo comprender el verdadero valor de dar. Estoy muy agradecida por cada momento vivido y por formar parte de esta hermosa misión.",
+    inicial: "M",
     color: "bg-rose-500",
   },
   {
-    nombre: "Sebastián Torres",
-    cargo: "Voluntario desde 2024",
+    nombre: "ANDREE-VOLUNTARIO",
+    cargo: "Voluntario 2025",
     texto:
-      "Las campañas navideñas me enseñaron que la felicidad más grande es ver sonreír a alguien a quien le diste un motivo para hacerlo.",
-    inicial: "S",
+      "Haber formado parte de family love es una de las mejores experiencias que he tenido el placer de vivir, no solo por haber conseguido traer sonrisas a las personas, también ver el impacto y la dicha q podemos dar es algo que alivia el alma, siempre estaré agradecido de haber podido formar parte de esta bella iniciativa",
+    inicial: "A",
     color: "bg-blue-500",
   },
   {
-    nombre: "Amy Egoavil",
-    cargo: "Voluntaria desde 2024",
+    nombre: "FLOR DE MARIA - VOLUNTARIA",
+    cargo: "Voluntaria 2025",
     texto:
-      "Family Love me dio un espacio para crecer, conocer personas increíbles y sentir que mi esfuerzo realmente importa.",
-    inicial: "A",
+      "Para mí, Family Love es como un hogar donde el apoyo constante, la comprensión y el cariño verdadero se unen para crear un lugar seguro al que perteneces. Es el vínculo que une a las personas, ayudándoles a crecer, a superar obstáculos y a celebrar cada momento juntos.",
+    inicial: "F",
     color: "bg-emerald-500",
   },
 ];
 
-// ─── FORMULARIO ───────────────────────────────────────────────────────────────
 function Formulario() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const [enviado, setEnviado] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
@@ -89,6 +91,11 @@ function Formulario() {
   };
 
   const handleSubmit = async () => {
+    if (!session) {
+      router.push("/login");
+      return;
+    }
+
     if (!form.nombre || !form.edad || !form.email || !form.telefono) {
       setError("Por favor completa todos los campos obligatorios.");
       return;
@@ -105,6 +112,8 @@ function Formulario() {
 
       if (res.ok) {
         setEnviado(true);
+      } else if (res.status === 401) {
+        router.push("/login");
       } else {
         setError("Hubo un error al enviar. Intenta nuevamente.");
       }
@@ -131,6 +140,7 @@ function Formulario() {
 
   return (
     <div className="space-y-4">
+
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -223,12 +233,11 @@ function Formulario() {
   );
 }
 
-// ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
 export default function VoluntariadoPage() {
   return (
     <main className="bg-white text-gray-800 font-sans">
 
-      {/* ── HERO ──────────────────────────────────────────────────────────── */}
+      {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#1a3a6b] via-[#2251a3] to-[#73eafe] overflow-hidden">
         <div className="absolute -top-20 -right-20 w-96 h-96 bg-white/5 rounded-full" />
         <div className="absolute bottom-0 -left-10 w-64 h-64 bg-white/5 rounded-full" />
@@ -259,7 +268,7 @@ export default function VoluntariadoPage() {
         </div>
       </section>
 
-      {/* ── POR QUÉ SER VOLUNTARIO ────────────────────────────────────────── */}
+      {/* Razones */}
       <section className="max-w-5xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
           <span className="text-[#2251a3] font-semibold text-sm tracking-widest uppercase">Razones para unirte</span>
@@ -282,7 +291,7 @@ export default function VoluntariadoPage() {
         </div>
       </section>
 
-      {/* ── REQUISITOS ────────────────────────────────────────────────────── */}
+      {/* Requisitos */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-14">
@@ -307,7 +316,7 @@ export default function VoluntariadoPage() {
         </div>
       </section>
 
-      {/* ── TESTIMONIOS ───────────────────────────────────────────────────── */}
+      {/* Testimonios */}
       <section className="max-w-5xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
           <span className="text-[#2251a3] font-semibold text-sm tracking-widest uppercase">Voces del equipo</span>
@@ -321,7 +330,7 @@ export default function VoluntariadoPage() {
               className="bg-white rounded-3xl p-6 shadow-md border-2 border-[#1a3a6b] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <div>
-                <div className="text-5xl text-[#2251a3] opacity-20 font-serif leading-none mb-3"></div>
+                <div className="text-5xl text-[#2251a3] opacity-20 font-serif leading-none mb-3">&ldquo;</div>
                 <p className="text-gray-900 text-sm leading-relaxed italic mb-6">
                   {t.texto}
                 </p>
@@ -340,7 +349,7 @@ export default function VoluntariadoPage() {
         </div>
       </section>
 
-      {/* ── FORMULARIO ────────────────────────────────────────────────────── */}
+      {/* Formulario */}
       <section id="formulario" className="bg-gradient-to-br from-[#1a3a6b] to-[#2251a3] py-20">
         <div className="max-w-2xl mx-auto px-6">
           <div className="text-center mb-10">

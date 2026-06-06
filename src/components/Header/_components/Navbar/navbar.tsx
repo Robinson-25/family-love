@@ -2,44 +2,27 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Menu, X } from "lucide-react";
-import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
-import styles from "./navbar.module.css";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import Image from "next/image";
 
-interface Props {
-  hotelCentersData: HotelCenter[];
-}
-
-export default function Navbar({ hotelCentersData }: Props) {
+export default function Navbar() {
   const [showMenuPopup, setShowMenuPopup] = React.useState(false);
 
   return (
     <>
-      {/* MENÚ MÓVIL */}
+      {/* MENU MOVIL */}
       <div className="flex sm:hidden">
         <div className="cursor-pointer" onClick={() => setShowMenuPopup(true)}>
           <Menu className="w-6 h-6" />
         </div>
         <div
           className={`fixed top-0 right-0 left-0 cursor-pointer w-full bg-white dark:bg-zinc-950 z-[10] overflow-hidden ${
-            showMenuPopup ? `h-full opacity-100` : "h-0 opacity-0"
+            showMenuPopup ? "h-full opacity-100" : "h-0 opacity-0"
           } flex flex-col items-center justify-center transition-all duration-500`}
         >
           <div className="w-full max-w-[150px]">
@@ -51,47 +34,22 @@ export default function Navbar({ hotelCentersData }: Props) {
               height={150}
               alt="Logo Family Love"
             />
-            <Link
-              href={`/`}
-              className="font-medium block mt-2"
-              onClick={() => setShowMenuPopup(false)}
-            >
+            <Link href="/" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
               Inicio
             </Link>
-            <Accordion type="single" collapsible className="w-full">
-              
-            </Accordion>
-            <Link
-              href={`/quienes-somos`}
-              className="font-medium block mt-2"
-              onClick={() => setShowMenuPopup(false)}
-            >
+            <Link href="/quienes-somos" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
               Quiénes Somos
             </Link>
-            <Link
-              href={`/proyecto`}
-              className="font-medium block mt-2"
-              onClick={() => setShowMenuPopup(false)}
-            >
-              Proyecto
+            <Link href="/proyecto" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+              Proyectos
             </Link>
-            <Link
-              href={`/programas`}
-              className="font-medium block mt-2"
-              onClick={() => setShowMenuPopup(false)}
-            >
-              Programa
+            <Link href="/programas" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+              Programas
             </Link>
-            <Link
-              href={`/voluntariado`}
-              className="font-medium block mt-2"
-              onClick={() => setShowMenuPopup(false)}
-            >
+            <Link href="/voluntariado" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
               Voluntariado
             </Link>
-            
           </div>
-
           <div
             className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center"
             onClick={() => setShowMenuPopup(false)}
@@ -101,27 +59,26 @@ export default function Navbar({ hotelCentersData }: Props) {
         </div>
       </div>
 
-      {/* MENÚ DESKTOP */}
+      {/* MENU DESKTOP */}
       <NavigationMenu className="hidden sm:flex">
         <NavigationMenuList>
-        
           <NavigationMenuItem>
-            <Link href={`/quienes-somos`} className="text-sm font-medium px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
+            <Link href="/quienes-somos" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
               Quiénes Somos
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href={`/proyecto`} className="text-sm font-medium px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
+            <Link href="/proyecto" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
               Proyectos
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href={`/programas`} className="text-sm font-medium px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
+            <Link href="/programas" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
               Programas
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href={`/voluntariado`} className="text-sm font-medium px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
+            <Link href="/voluntariado" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
               Voluntariado
             </Link>
           </NavigationMenuItem>
@@ -130,25 +87,3 @@ export default function Navbar({ hotelCentersData }: Props) {
     </>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<typeof Link>
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li className="">
-      <Link legacyBehavior passHref ref={ref} {...props}>
-        <NavigationMenuLink
-          className={cn(
-            "flex flex-col rounded-md gap-1 px-5 py-3 hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-150",
-            className
-          )}
-        >
-          <div className="text-sm font-semibold">{title}</div>
-          <p className="text-sm">{children}</p>
-        </NavigationMenuLink>
-      </Link>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";

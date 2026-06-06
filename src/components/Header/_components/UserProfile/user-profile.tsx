@@ -30,6 +30,10 @@ import Image from "next/image";
 const UserProfile = () => {
   const { data: session } = useSession();
 
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: "/login", redirect: true });
+  };
+
   return (
     <DropdownMenu modal={false} onOpenChange={() => {}}>
       <DropdownMenuTrigger className=" data-[state=open]:rotate-child-180 outline-none rounded-md">
@@ -99,13 +103,11 @@ const UserProfile = () => {
               </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              <div
-                onClick={() => {
-                  signOut();
-                }}
-                className="flex items-center w-full h-full"
-              >
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={handleSignOut}
+            >
+              <div className="flex items-center w-full h-full">
                 <LogOut className="mr-2 h-4 w-4 text-red-400" />
                 <span className="text-red-400">Cerrar Sesión</span>
               </div>

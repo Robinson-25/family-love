@@ -17,18 +17,18 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import ButtonLoading from "@/components/Loading/ButtonLoading/button-loading";
+import { signIn } from "next-auth/react";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Debe tener 2 caracteres como mínimo",
-  }),
+  username: z.string()
+    .min(2, { message: "Debe tener 2 caracteres como mínimo" })
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, { message: "Solo se permiten letras" }),
   email: z.string().email({ message: "Correo electrónico inválido" }),
-  password: z.string().min(10, {
-    message: "Debe tener 10 caracteres como mínimo",
+  password: z.string().min(4, {
+    message: "Debe tener 4 caracteres como mínimo",
   }),
 });
 
@@ -54,20 +54,17 @@ const RegisterForm = () => {
         setTimeout(() => setFormLoading(false), 2100);
         toast.error(response.data.error);
       } else if (response.data.ok) {
-        Swal.fire({
-          html: `<div>
-            <h3 style="font-weight: bold; font-size: 1.6rem; margin-bottom: 14px; color: rgb(220,220,220);">Activa tu cuenta</h3>
-            <p style="font-size: 1rem; line-height: 1.6rem; color: rgb(200,200,200);">
-              Te acabamos de enviar un correo electrónico con un enlace para
-              verificar tu email y activar tu cuenta. Por favor revisa tu
-              bandeja de entrada, si no lo encuentras también puedes revisar en spam.
-            </p>
-          </div>`,
-          confirmButtonColor: "#0271bd",
-          background: "#05101f",
-        }).then(() => {
-          router.push("/login");
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
         });
+
+        if (result?.ok) {
+          router.push("/");
+        } else {
+          router.push("/login");
+        }
       }
     } catch (error) {
       setTimeout(() => setFormLoading(false), 2100);
@@ -355,9 +352,13 @@ const RegisterForm = () => {
                       <FormControl>
                         <Input
                           type="text"
-                          placeholder="ej. johndoe"
+                          placeholder="ej. FamilyLove"
                           className="reg-input"
                           {...field}
+                          onChange={(e) => {
+                            const soloLetras = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+                            field.onChange(soloLetras);
+                          }}
                         />
                       </FormControl>
                       <FormMessage style={{ fontSize: "11px", color: "#73eafe", opacity: 0.8, marginTop: "4px" }} />
@@ -374,7 +375,7 @@ const RegisterForm = () => {
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="ej. Robinsonbiktu@gmail.com"
+                          placeholder="ej. Robsonpepe@gmail.com"
                           className="reg-input"
                           {...field}
                         />
@@ -393,8 +394,9 @@ const RegisterForm = () => {
                       <FormControl>
                         <Input
                           type="password"
-                          placeholder="••••••••••••"
+                          placeholder="••••"
                           className="reg-input"
+                          autoComplete="new-password"
                           {...field}
                         />
                       </FormControl>

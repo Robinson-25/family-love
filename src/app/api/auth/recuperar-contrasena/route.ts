@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import jwt from "jsonwebtoken";
@@ -10,11 +9,12 @@ export async function POST(req: NextRequest) {
   const { email } = await req.json();
 
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const [rows] = await db.execute(
+      "SELECT * FROM User WHERE email = ?",
+      [email]
+    ) as any;
+
+    const user = (rows as any[])[0];
 
     if (user) {
       const token = jwt.sign(
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         }
       );
 
-      const data = await resend.emails.send({
+      await resend.emails.send({
         from: "Hospedaje El Rinconcito <noreply@hospedajerinconcito.com>",
         to: [email],
         subject: "Cambia tu contraseña",
@@ -40,9 +40,16 @@ export async function POST(req: NextRequest) {
         { status: 200 }
       );
     } else {
-      return NextResponse.json({ error: "El usuario no existe" });
+      return NextResponse.json(
+        { error: "El usuario no existe" },
+        { status: 404 }
+      );
     }
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    console.error("ERROR RECUPERAR CONTRASEÑA:", error);
+    return NextResponse.json(
+      { error: "Error interno del servidor" },
+      { status: 500 }
+    );
   }
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import "./login-form.css";
+
 import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,8 +25,8 @@ import ButtonLoading from "@/components/Loading/ButtonLoading/button-loading";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Correo electrónico inválido" }),
-  password: z.string().min(10, {
-    message: "Debe tener 10 caracteres como mínimo",
+  password: z.string().min(4, {
+    message: "Debe tener 4 caracteres como mínimo",
   }),
 });
 
@@ -430,7 +432,7 @@ const LoginForm = () => {
               <span className="divider-dot" />
             </div>
 
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
               <div className="field-wrap">
                 <FormField
                   control={form.control}
@@ -445,6 +447,7 @@ const LoginForm = () => {
                           type="email"
                           placeholder="ejemplo@correo.com"
                           className="field-input"
+                          autoComplete="off"
                           {...field}
                         />
                       </FormControl>
@@ -464,6 +467,7 @@ const LoginForm = () => {
                           type="password"
                           placeholder="••••••••••••"
                           className="field-input"
+                          autoComplete="new-password"
                           {...field}
                         />
                       </FormControl>
