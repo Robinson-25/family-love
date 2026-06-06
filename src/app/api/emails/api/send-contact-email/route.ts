@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -9,16 +8,21 @@ export const POST = async (req: NextRequest) => {
   const { name, email, cellPhone, message } = await req.json();
 
   try {
-    const emailExists = await prisma.newsletterEmail.findUnique({
-      where: { email },
-    });
+    const [rows] = await db.execute(
+      "SELECT * FROM newsletterEmail WHERE email = ?",
+      [email]
+    ) as any;
+
+    const emailExists = (rows as any[])[0];
+
     if (!emailExists) {
-      const newNewsletterEmail = await prisma.newsletterEmail.create({
-        data: { email },
-      });
+      await db.execute(
+        "INSERT INTO newsletterEmail (email) VALUES (?)",
+        [email]
+      );
     }
 
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: "Hospedaje El Rinconcito <onboarding@resend.dev>",
       to: ["robinsonwelkinbiktuchumpi@gmail.com"],
       subject: "Email de cliente",

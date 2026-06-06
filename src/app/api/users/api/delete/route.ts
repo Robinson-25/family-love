@@ -1,14 +1,12 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   const { id } = await req.json();
 
   try {
-    const removedUser = await prisma.user.delete({
-      where: { id },
-    });
+    await db.execute("DELETE FROM User WHERE id = ?", [id]);
+
     return NextResponse.json(
       { ok: true, message: "Usuario eliminado correctamente" },
       { status: 200 }

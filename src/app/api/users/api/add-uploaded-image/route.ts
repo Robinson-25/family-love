@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -13,27 +12,22 @@ export const POST = async (req: NextRequest) => {
   const { userId, image } = await req.json();
 
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: { image: true },
-    });
-    if (user?.image) {
-      const deletedImage = await prisma.image.delete({
-        where: { id: user?.image?.id },
-      });
-      const response = await cloudinary.uploader.destroy(
-        user?.image?.public_id as string
-      );
+    const [rows] = await db.execute(
+      "SELECT * FROM image WHERE userId = ?",
+      [userId]
+    ) as any;
+
+    const existingImage = (rows as any[])[0];
+
+    if (existingImage) {
+      await cloudinary.uploader.destroy(existingImage.public_id);
+      await db.execute("DELETE FROM image WHERE userId = ?", [userId]);
     }
 
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        image: {
-          create: { url: image.url, public_id: image.public_id },
-        },
-      },
-    });
+    await db.execute(
+      "INSERT INTO image (url, public_id, userId) VALUES (?, ?, ?)",
+      [image.url, image.public_id, userId]
+    );
 
     return NextResponse.json({
       ok: true,

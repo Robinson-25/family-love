@@ -1,52 +1,51 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   const { id, username, email, role } = await req.json();
 
   try {
-    const user = await prisma.user.findUnique({
-      where: { id },
-    });
+    const [userRows] = await db.execute(
+      "SELECT * FROM User WHERE id = ?",
+      [id]
+    ) as any;
+    const user = (userRows as any[])[0];
 
     if (!user) {
       return NextResponse.json({ error: "El usuario no existe" });
     }
 
-    const usernameExists = await prisma.user.findUnique({
-      where: { username },
-    });
-    const emailExists = await prisma.user.findUnique({
-      where: { email },
-    });
+    const [usernameRows] = await db.execute(
+      "SELECT * FROM User WHERE username = ?",
+      [username]
+    ) as any;
+    const usernameExists = (usernameRows as any[])[0];
 
-    if (user?.username !== username) {
-      if (usernameExists) {
-        return NextResponse.json({ error: "Este nombre de usuario ya existe" });
-      }
-    } else if (user?.email !== email) {
-      if (emailExists) {
-        return NextResponse.json({ error: "Este correo ya existe" });
-      }
+    const [emailRows] = await db.execute(
+      "SELECT * FROM User WHERE email = ?",
+      [email]
+    ) as any;
+    const emailExists = (emailRows as any[])[0];
+
+    if (user.username !== username && usernameExists) {
+      return NextResponse.json({ error: "Este nombre de usuario ya existe" });
     }
 
-    const updatedUser = await prisma.user.update({
-      where: { id },
-      data:
-        user?.email === email
-          ? {
-              username,
-              email,
-              role,
-            }
-          : {
-              username,
-              email,
-              role,
-              emailVerified: null,
-            },
-    });
+    if (user.email !== email && emailExists) {
+      return NextResponse.json({ error: "Este correo ya existe" });
+    }
+
+    if (user.email === email) {
+      await db.execute(
+        "UPDATE User SET username = ?, email = ?, role = ? WHERE id = ?",
+        [username, email, role, id]
+      );
+    } else {
+      await db.execute(
+        "UPDATE User SET username = ?, email = ?, role = ?, emailVerified = NULL WHERE id = ?",
+        [username, email, role, id]
+      );
+    }
 
     return NextResponse.json({
       ok: true,
