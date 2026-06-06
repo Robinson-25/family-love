@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import jwt from "jsonwebtoken";
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   const { email } = await req.json();
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const [rows] = await db.execute(
+      "SELECT * FROM User WHERE email = ?",
+      [email]
+    ) as any;
+
+    const user = (rows as any[])[0];
 
     if (user) {
       if (user.emailVerified) {
@@ -22,11 +22,10 @@ export async function POST(req: NextRequest) {
       const token = jwt.sign(
         { sub: user.id },
         process.env.JWT_SECRET as string,
-        {
-          expiresIn: 60 * 10,
-        }
+        { expiresIn: 60 * 10 }
       );
-      const data = await resend.emails.send({
+
+      await resend.emails.send({
         from: "Hospedaje El Rinconcito <noreply@hospedajerinconcito.com>",
         to: [email],
         subject: "Activa tu cuenta",

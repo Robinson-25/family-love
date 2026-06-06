@@ -1,24 +1,25 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   const { email } = await req.json();
 
   try {
-    const emailExists = await prisma.newsletterEmail.findUnique({
-      where: { email },
-    });
+    const [rows] = await db.execute(
+      "SELECT * FROM newsletterEmail WHERE email = ?",
+      [email]
+    ) as any;
+
+    const emailExists = (rows as any[])[0];
 
     if (emailExists) {
       return NextResponse.json({ error: "Este correo ya existe" });
     }
 
-    const newsletterEmail = await prisma.newsletterEmail.create({
-      data: {
-        email,
-      },
-    });
+    await db.execute(
+      "INSERT INTO newsletterEmail (email) VALUES (?)",
+      [email]
+    );
 
     return NextResponse.json(
       { ok: true, message: "Email registrado correctamente" },

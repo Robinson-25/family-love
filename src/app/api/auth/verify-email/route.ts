@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -17,24 +16,24 @@ export async function POST(req: NextRequest) {
         token,
         process.env.JWT_SECRET as string
       ) as Payload;
+
       if (payload) {
-        const user = await prisma.user.findUnique({
-          where: {
-            id: payload.sub,
-          },
-        });
+        const [rows] = await db.execute(
+          "SELECT * FROM User WHERE id = ?",
+          [payload.sub]
+        ) as any;
+
+        const user = (rows as any[])[0];
 
         if (!user) {
           return NextResponse.json({ error: "El usuario no existe" });
         }
-        const updatedUser = await prisma.user.update({
-          where: {
-            id: payload.sub,
-          },
-          data: {
-            emailVerified: new Date(),
-          },
-        });
+
+        await db.execute(
+          "UPDATE User SET emailVerified = ? WHERE id = ?",
+          [new Date(), payload.sub]
+        );
+
         return NextResponse.json({ ok: true }, { status: 200 });
       }
     }

@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 import bcrypt from "bcrypt";
-
-interface Payload {
-  sub: string;
-  iat: number;
-  exp: number;
-}
 
 export async function POST(req: NextRequest) {
   const { id, newPassword } = await req.json();
@@ -15,14 +8,10 @@ export async function POST(req: NextRequest) {
   try {
     const passwordHashed = await bcrypt.hash(newPassword, 10);
 
-    const updatedUser = await prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        password: passwordHashed,
-      },
-    });
+    await db.execute(
+      "UPDATE User SET password = ? WHERE id = ?",
+      [passwordHashed, id]
+    );
 
     return NextResponse.json(
       { ok: true, message: "Contraseña actualizada correctamente" },
