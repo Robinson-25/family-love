@@ -1,12 +1,10 @@
-import { prisma } from "@/lib/prisma";
-
+import { db } from "@/lib/db";
 
 export const getUserById = async (id: string) => {
-  const user = await prisma.user.findUnique({
-    where: { id },
-    include: {
-      image: true,
-    },
-  });
+  const [rows] = await db.execute(
+    "SELECT * FROM User WHERE id = ?",
+    [id]
+  ) as any;
+  const user = (rows as any[])[0];
   return user;
 };
