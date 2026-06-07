@@ -18,11 +18,11 @@ export default function Navbar() {
           <Menu className="w-6 h-6" />
         </div>
         <div
-          className={`fixed top-0 right-0 left-0 cursor-pointer w-full bg-white dark:bg-zinc-950 z-[80] overflow-hidden ${
+          className={`fixed top-0 right-0 left-0 w-full bg-white dark:bg-zinc-950 z-[80] overflow-hidden ${
             showMenuPopup ? "h-full opacity-100" : "h-0 opacity-0"
           } flex flex-col items-center justify-center transition-all duration-500`}
         >
-          <div className="w-full max-w-[150px]">
+          <div className="w-full max-w-[200px] flex flex-col items-center gap-4">
             <Image
               priority
               src={"/images/hero-images/logo-family-love.png"}
@@ -31,24 +31,24 @@ export default function Navbar() {
               height={150}
               alt="Logo Family Love"
             />
-            <Link href="/" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+            <Link href="/" className="font-bold text-gray-900 dark:text-white text-lg block w-full text-center" onClick={() => setShowMenuPopup(false)}>
               Inicio
             </Link>
-            <Link href="/quienes-somos" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+            <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-lg block w-full text-center" onClick={() => setShowMenuPopup(false)}>
               Quiénes Somos
             </Link>
-            <Link href="/proyecto" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+            <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-lg block w-full text-center" onClick={() => setShowMenuPopup(false)}>
               Proyectos
             </Link>
-            <Link href="/programas" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+            <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-lg block w-full text-center" onClick={() => setShowMenuPopup(false)}>
               Programas
             </Link>
-            <Link href="/voluntariado" className="font-bold text-gray-900 block mt-2" onClick={() => setShowMenuPopup(false)}>
+            <Link href="/voluntariado" className="font-bold text-gray-900 dark:text-white text-lg block w-full text-center" onClick={() => setShowMenuPopup(false)}>
               Voluntariado
             </Link>
           </div>
           <div
-            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center"
+            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center cursor-pointer"
             onClick={() => setShowMenuPopup(false)}
           >
             <X className="w-5 h-5" />
