@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <>
       {/* MENU MOVIL */}
-      <div className="flex sm:hidden">
+      <div className="flex md:hidden">
         <div className="cursor-pointer" onClick={() => setShowMenuPopup(true)}>
           <Menu className="w-6 h-6" />
         </div>
@@ -56,7 +56,7 @@ export default function Navbar() {
         </div>
       </div>
       {/* MENU DESKTOP */}
-      <NavigationMenu className="hidden sm:flex">
+      <NavigationMenu className="hidden md:flex">
         <NavigationMenuList>
           <NavigationMenuItem>
             <Link href="/quienes-somos" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">
