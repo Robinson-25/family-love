@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
@@ -9,10 +8,8 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-
 export default function Navbar() {
   const [showMenuPopup, setShowMenuPopup] = React.useState(false);
-
   return (
     <>
       {/* MENU MOVIL */}
@@ -21,7 +18,7 @@ export default function Navbar() {
           <Menu className="w-6 h-6" />
         </div>
         <div
-          className={`fixed top-0 right-0 left-0 cursor-pointer w-full bg-white dark:bg-zinc-950 z-[10] overflow-hidden ${
+          className={`fixed top-0 right-0 left-0 cursor-pointer w-full bg-white dark:bg-zinc-950 z-[80] overflow-hidden ${
             showMenuPopup ? "h-full opacity-100" : "h-0 opacity-0"
           } flex flex-col items-center justify-center transition-all duration-500`}
         >
@@ -58,7 +55,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
       {/* MENU DESKTOP */}
       <NavigationMenu className="hidden sm:flex">
         <NavigationMenuList>
