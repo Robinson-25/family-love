@@ -18,12 +18,9 @@ const Header = async () => {
           alt="Logo Family Love"
         />
       </Link>
-      <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
-        <Navbar />
-      </div>
+      <Navbar />
       <div className="flex items-center gap-3">
         <ToggleTheme />
-        <Navbar />
         <UserProfile />
       </div>
     </header>
