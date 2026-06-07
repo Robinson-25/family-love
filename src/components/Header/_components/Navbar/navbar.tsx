@@ -9,33 +9,34 @@ export default function Navbar() {
   return (
     <>
       {/* MENU MOVIL */}
-      <div className="flex lg:hidden">
+      <div className="fixed top-2 right-16 flex lg:hidden z-[75]">
         <div className="cursor-pointer" onClick={() => setShowMenuPopup(true)}>
           <Menu className="w-6 h-6" />
         </div>
-        <div
-          className={`fixed top-0 right-0 left-0 w-full bg-white dark:bg-zinc-950 z-[80] overflow-hidden ${
-            showMenuPopup ? "h-full opacity-100" : "h-0 opacity-0"
-          } flex flex-col items-center justify-center transition-all duration-500`}
-        >
-          <div className="w-full max-w-[200px] flex flex-col items-center gap-6">
-            <Image
-              priority
-              src={"/images/hero-images/logo-family-love.png"}
-              className="w-full max-w-[100px] mx-auto"
-              width={300}
-              height={150}
-              alt="Logo Family Love"
-            />
-            <Link href="/" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Inicio</Link>
-            <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
-            <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Proyectos</Link>
-            <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Programas</Link>
-            <Link href="/voluntariado" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Voluntariado</Link>
-          </div>
-          <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowMenuPopup(false)}>
-            <X className="w-6 h-6" />
-          </div>
+      </div>
+      {/* POPUP MOVIL */}
+      <div
+        className={`fixed top-0 right-0 left-0 w-full bg-white dark:bg-zinc-950 z-[80] overflow-hidden ${
+          showMenuPopup ? "h-full opacity-100" : "h-0 opacity-0"
+        } flex flex-col items-center justify-center transition-all duration-500 lg:hidden`}
+      >
+        <div className="w-full max-w-[200px] flex flex-col items-center gap-6">
+          <Image
+            priority
+            src="/images/hero-images/logo-family-love.png"
+            className="w-full max-w-[100px] mx-auto"
+            width={300}
+            height={150}
+            alt="Logo Family Love"
+          />
+          <Link href="/" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Inicio</Link>
+          <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
+          <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Proyectos</Link>
+          <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Programas</Link>
+          <Link href="/voluntariado" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Voluntariado</Link>
+        </div>
+        <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowMenuPopup(false)}>
+          <X className="w-6 h-6" />
         </div>
       </div>
       {/* MENU DESKTOP */}
