@@ -8,36 +8,36 @@ export default function Navbar() {
   const [showMenuPopup, setShowMenuPopup] = React.useState(false);
   return (
     <>
-      {/* MENU MOVIL */}
-      <div className="fixed top-2 right-16 flex lg:hidden z-[75]">
-        <div className="cursor-pointer" onClick={() => setShowMenuPopup(true)}>
+      {/* BOTON HAMBURGUESA - solo movil */}
+      <div className="flex lg:hidden">
+        <button className="cursor-pointer p-1" onClick={() => setShowMenuPopup(true)}>
           <Menu className="w-6 h-6" />
-        </div>
+        </button>
       </div>
-      {/* POPUP MOVIL */}
+      {/* POPUP MENU MOVIL */}
       <div
-        className={`fixed top-0 right-0 left-0 w-full bg-white dark:bg-zinc-950 z-[80] overflow-hidden ${
-          showMenuPopup ? "h-full opacity-100" : "h-0 opacity-0"
-        } flex flex-col items-center justify-center transition-all duration-500 lg:hidden`}
+        className={`fixed top-0 left-0 right-0 w-full bg-white dark:bg-zinc-950 z-[90] transition-all duration-500 ${
+          showMenuPopup ? "h-screen opacity-100" : "h-0 opacity-0 pointer-events-none"
+        } flex flex-col items-center justify-center`}
       >
-        <div className="w-full max-w-[200px] flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6">
           <Image
             priority
             src="/images/hero-images/logo-family-love.png"
-            className="w-full max-w-[100px] mx-auto"
+            className="w-24"
             width={300}
             height={150}
             alt="Logo Family Love"
           />
-          <Link href="/" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Inicio</Link>
-          <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
-          <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Proyectos</Link>
-          <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Programas</Link>
-          <Link href="/voluntariado" className="font-bold text-gray-900 dark:text-white text-lg" onClick={() => setShowMenuPopup(false)}>Voluntariado</Link>
+          <Link href="/" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Inicio</Link>
+          <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
+          <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Proyectos</Link>
+          <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Programas</Link>
+          <Link href="/voluntariado" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Voluntariado</Link>
         </div>
-        <div className="absolute top-3 right-3 cursor-pointer" onClick={() => setShowMenuPopup(false)}>
-          <X className="w-6 h-6" />
-        </div>
+        <button className="absolute top-4 right-4 cursor-pointer" onClick={() => setShowMenuPopup(false)}>
+          <X className="w-7 h-7" />
+        </button>
       </div>
       {/* MENU DESKTOP */}
       <div className="hidden lg:flex items-center gap-2">
