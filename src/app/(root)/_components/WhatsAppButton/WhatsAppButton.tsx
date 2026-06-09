@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function WhatsAppButton() {
   const [abierto, setAbierto] = useState(false);
 
-  const numero = "51988937401";
+  const numero = "51991512267";
   const mensaje = encodeURIComponent(
     "Hola Family Love 👋 Me gustaría obtener más información sobre sus programas."
   );
