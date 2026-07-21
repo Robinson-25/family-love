@@ -10,26 +10,13 @@ const vision =
   "Ser una organización sin fines de lucro reconocida a nivel nacional por su impacto positivo en el desarrollo integral de la juventud y en la labor social en la población.";
 
 const historia = [
-  {
-    fecha: "10 julio 2024",
-    texto:
-      "Family Love fue creada el 10 de julio de 2024 por iniciativa de dos estudiantes de Medicina Humana, Tania Sarai Trinidad Meza y Naiara Raymundo Maraví, con el propósito de contribuir al desarrollo integral de adolescentes y jóvenes a través del voluntariado, la acción social y el liderazgo con enfoque humano.",
-  },
-  {
-    fecha: "12 julio 2024",
-    texto:
-      "La organización Family Love inició su identidad visual el 12 de julio de 2024 con un primer logo creado por la estudiante Dayana Limache. Posteriormente, el 2 de abril de 2025, se presentó el logo oficial diseñado por Haiden Espinoza. Desde su fundación, la organización ha sido liderada por su fundadora Tania Sarai Trinidad Meza, quien fue Co-Directora General en 2024 y Directora General durante 2025 y 2026.",
-  },
-  {
-    fecha: "Formación inicial del equipo de líderes",
-    texto:
-      "El 6 de octubre de 2024, se conformó el primer equipo de líderes de Family Love, conformado por: Maricely Fabian, Piero Bernal, Sebastian Torres, Angie del Río, Solimar Oviedo y Amy Egoavil. Este equipo lideró las primeras actividades y programas de la organización durante su año inaugural.",
-  },
-  {
-    fecha: "Equipo de gestión hasta finales de 2025",
-    texto:
-      "El equipo de apoyo de Family Love acompañó las actividades sociales y formativas de la organización hasta finales de 2025. Entre los integrantes se encuentran Darlyne Oviedo Villantoy, Angie del Río Borja, Esaú Sedano Samaniego, Ibeth Fernandez Chachi, Jhan Toro Baltazar, Maciel Quispe Chenet, Mafer Mayta Carhuancho y Dulce del Río Borja.",
-  },
+  "Family Love nació el 10 de julio de 2024 con el propósito de contribuir al desarrollo integral de adolescentes y jóvenes mediante el voluntariado, la acción social y el liderazgo con enfoque humano, promoviendo una cultura de empatía, solidaridad y compromiso con las comunidades más vulnerables del Perú.",
+  "Como parte de su proceso de fortalecimiento institucional, el 2 de abril de 2025 la organización presentó su logo oficial, consolidando su identidad institucional y proyectando una imagen alineada con su misión, visión y valores.",
+  "Durante el año 2024, Family Love desarrolló sus primeras actividades de impacto social, entre ellas el Taller de Risoterapia dirigido a adultos mayores de la ONP y del CAM ESSALUD – Concepción. Asimismo, realizó su primera campaña navideña solidaria en la comunidad campesina de Ullusca, provincia de Jauja, y una campaña de ayuda solidaria en las calles de Huancayo, brindando acompañamiento humano y apoyo mediante la entrega de juguetes, ropa y víveres a personas en situación de vulnerabilidad.",
+  "En 2025, la organización amplió su labor social mediante actividades de acompañamiento en el CAR Virgen de Lourdes de Jauja, nuevos talleres de risoterapia en el Centro de Salud de Sapallanga y el CAM ESSALUD – Concepción, campañas solidarias en favor del albergue Santo Monte de Jehová y de adultos mayores en situación de abandono en las calles de Jauja. Asimismo, participó como organización colaboradora en el evento \"Celebrando la Fuerza Femenina\", reafirmando su compromiso con el servicio y el trabajo articulado con otras instituciones.",
+  "Como parte de las últimas actividades del año 2025, Family Love realizó su segunda campaña navideña solidaria en la comunidad de San José de Apata, provincia de Jauja, y una campaña de apoyo dirigida a adultos mayores en las calles de Huancayo, reafirmando su compromiso con las poblaciones en situación de vulnerabilidad.",
+  "A lo largo de su crecimiento, Family Love ha contado con el respaldo de aliados estratégicos y auspiciadores que han contribuido al desarrollo de sus programas y proyectos sociales, fortaleciendo su impacto en las comunidades beneficiarias.",
+  "Actualmente, Family Love continúa consolidándose como una organización juvenil con visión de crecimiento, estructura organizacional y un firme compromiso con el desarrollo social y humano del Perú, bajo el liderazgo de su fundadora y directora general, Tania Sarai Trinidad Meza.",
 ];
 
 const objetivos = [
@@ -303,36 +290,23 @@ export default function QuienesSomosPage() {
         </div>
       </section>
 
-      {/* ── HISTORIA ──────────────────────────────────────────────────────── */}
-      <section className="bg-gray-50 py-20">
+      {/* ── HISTORIA (texto simple, sin tarjetas ni línea de tiempo) ────────── */}
+      <section className="bg-white py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-14">
+          <div className="text-center mb-12">
             <span className="text-[#2251a3] font-semibold text-sm tracking-widest uppercase">Nuestra historia</span>
             <h2 className="text-4xl font-extrabold text-gray-900 mt-2">El camino de Family Love</h2>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#2251a3] to-[#73eafe] -translate-x-1/2" />
-            <div className="space-y-10">
-              {historia.map((item, i) => (
-                <div
-                  key={i}
-                  className={`relative flex items-start gap-6 md:gap-0 ${
-                    i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-[#2251a3] rounded-full border-4 border-white shadow -translate-x-1/2 mt-4 z-10" />
-                  <div className={`ml-16 md:ml-0 md:w-5/12 ${i % 2 === 0 ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"}`}>
-                    <div className="bg-[#2251a3] rounded-2xl p-6 shadow-md border border-[#2251a3] hover:shadow-lg transition-shadow">
-                      <span className="inline-block bg-[#73eafe] text-[#1a3a6b] text-xs font-bold px-3 py-1 rounded-full mb-3">
-                        {item.fecha}
-                      </span>
-                      <p className="text-white text-sm leading-relaxed">{item.texto}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="space-y-6">
+            {historia.map((parrafo, i) => (
+              <p
+                key={i}
+                className="text-gray-700 text-base leading-relaxed text-justify"
+              >
+                {parrafo}
+              </p>
+            ))}
           </div>
         </div>
       </section>
