@@ -59,12 +59,6 @@ const equipo = [
     bio: "Estudiante de Medicina Humana. Modelo profesional, 2021–actualidad. Fundadora de la organización Family Love y de 'Alza Tu Voz'. Becaria del Aspire Leaders Program (fundado por Harvard) y del programa Patria C. Parlamentaria Joven - Plenario Región Junín, 2025. Embajadora IRF, 2026. Community Leader Institute Aspire, 2026. Co-directora general de Family Love, 2024, y directora general durante el periodo 2025–2026. Ponente de la conferencia 'Liderar desde lo humano: jóvenes que transforman realidades desde la empatía y la acción' – Bridges of Equity.",
   },
   {
-    nombre: "Naiara Raymundo",
-    cargo: "CONSEJERA INSTITUCIONAL - FUNDADORA",
-    imagen: "/images/hero-images/Naiara.png",
-    bio: "Estudiante de Medicina Humana y fundadora de Family Love. Ponente en el tema 'Cirrosis hepática y complicaciones' – SOCIEMLA, 2024. Coordinadora de la Sociedad de Clown Hospitalario y Comunitario 'Thieves of Smiles' – UPLA, 2023. Especialista certificada en lectura veloz – ENSIL. Reconocida como Mejor Cumista Femenina en el CUMIS Nacional 2024-I, Río Tambo – SOCIEMC. Ponente en los talleres 'Niño interior y manejo de grupos infantiles' (SOCIEMC) e 'Introducción al clown hospitalario' (Universidad Nacional de Piura), ambos 2024-I. Ponente del tema 'Anatomía de miembro inferior' – SOCIEMLA, 2021.",
-  },
-  {
     nombre: "Darlyne Oviedo",
     cargo: "SECRETARÍA GENERAL",
     imagen: "/images/hero-images/Darlyne.jpg",
