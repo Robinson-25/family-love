@@ -98,7 +98,7 @@ export default function ProgramasPage() {
               </div>
               <div className="h-64 rounded-[2rem] bg-[#73eafe] overflow-hidden relative shadow-2xl">
                 <div className="absolute inset-0 bg-black/10" />
-                <Image src="/images/hero-images/programa01.jpg" alt="Formación" fill className="object-cover" />
+                <Image src="/images/hero-images/Programa01.jpg" alt="Formación" fill className="object-cover" />
               </div>
             </div>
           </div>
