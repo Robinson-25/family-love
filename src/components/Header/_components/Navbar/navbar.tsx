@@ -30,6 +30,7 @@ export default function Navbar() {
             alt="Logo Family Love"
           />
           <Link href="/" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Inicio</Link>
+            <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
           <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
           <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Proyectos</Link>
           <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Programas</Link>
