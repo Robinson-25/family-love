@@ -30,7 +30,7 @@ export default function Navbar() {
             alt="Logo Family Love"
           />
           <Link href="/" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Inicio</Link>
-            <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
+            <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Noticias</Link>
           <Link href="/quienes-somos" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Quiénes Somos</Link>
           <Link href="/proyecto" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Proyectos</Link>
           <Link href="/programas" className="font-bold text-gray-900 dark:text-white text-xl" onClick={() => setShowMenuPopup(false)}>Programas</Link>
@@ -42,6 +42,7 @@ export default function Navbar() {
       </div>
       {/* MENU DESKTOP */}
       <div className="hidden lg:flex items-center gap-2 absolute left-1/2 -translate-x-1/2">
+        <Link href="/quienes-somos" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">Noticias</Link>
         <Link href="/quienes-somos" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">Quiénes Somos</Link>
         <Link href="/proyecto" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">Proyectos</Link>
         <Link href="/programas" className="text-base font-bold text-gray-900 px-4 py-2 rounded-md hover:bg-[#73eafe]/20 hover:text-[#0271bd] transition-all duration-200">Programas</Link>
