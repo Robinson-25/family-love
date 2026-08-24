@@ -80,7 +80,7 @@ export default function SubirGaleria({ label, valores, onCambio }: Props) {
       </div>
       <p className="text-xs text-gray-400 mt-1">
         Puedes agregar varias fotos, una por una. La primera foto agregada arriba en
-        "Imagen principal" es la que se ve en la tarjeta del listado.
+        &quot;Imagen principal&quot; es la que se ve en la tarjeta del listado.
       </p>
     </div>
   );
